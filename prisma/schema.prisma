@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Affinity {
+  id     Int    @id @default(autoincrement())
+  name   String @unique
+  symbol String
+  color  String
+  card   Card?  @relation(fields: [cardId], references: [id])
+  cardId Int?   @unique
+}
+
+model Expansion {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  Card Card?
+}
+
+model Card {
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
+  desc        String
+  image       String?
+  cardType    Type
+  expansion   Expansion? @relation(fields: [expansionId], references: [id])
+  Affinity    Affinity?
+  Deck        Deck?      @relation(fields: [deckId], references: [id])
+  deckId      String?
+  deckName    String?
+  expansionId Int?       @unique
+}
+
+model Deck {
+  id     String  @id @default(uuid())
+  name   String
+  desc   String
+  cards  Card[]
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
+}
+
+model User {
+  id    String @id @default(uuid())
+  name  String @unique
+  email String @unique
+  decks Deck[]
+  Token Token?
+}
+
+model Token {
+  token  String  @id
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String? @unique
+}
+
+enum Type {
+  OFFENSE
+  DEFENSE
+  UTILITY
+  MOBILITY
+  TALENT
+  STAT
+  ABILITY
+}
