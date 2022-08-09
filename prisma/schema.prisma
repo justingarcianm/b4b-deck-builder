@@ -10,33 +10,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Affinity {
-  id     Int    @id @default(autoincrement())
-  name   String @unique
-  symbol String
-  color  String
-  card   Card?  @relation(fields: [cardId], references: [id])
-  cardId Int?   @unique
-}
-
 model Expansion {
   id   Int    @id @default(autoincrement())
   name String @unique
-  Card Card?
+  card Card?
 }
 
 model Card {
-  id          Int        @id @default(autoincrement())
-  name        String     @unique
-  desc        String
-  image       String?
-  cardType    Type
-  expansion   Expansion? @relation(fields: [expansionId], references: [id])
-  Affinity    Affinity?
-  Deck        Deck?      @relation(fields: [deckId], references: [id])
-  deckId      String?
-  deckName    String?
-  expansionId Int?       @unique
+  id           Int        @id @default(autoincrement())
+  name         String     @unique
+  desc         String
+  image        String?
+  cardType     Type
+  expansion    Expansion? @relation(fields: [expansionId], references: [id])
+  cardAffinity Affinity
+  deck         Deck?      @relation(fields: [deckId], references: [id])
+  deckId       String?
+  deckName     String?
+  expansionId  Int?       @unique
 }
 
 model Deck {
@@ -44,7 +35,7 @@ model Deck {
   name   String
   desc   String
   cards  Card[]
-  User   User?   @relation(fields: [userId], references: [id])
+  user   User?   @relation(fields: [userId], references: [id])
   userId String?
 }
 
@@ -53,7 +44,7 @@ model User {
   name  String @unique
   email String @unique
   decks Deck[]
-  Token Token?
+  token Token?
 }
 
 model Token {
@@ -70,4 +61,11 @@ enum Type {
   TALENT
   STAT
   ABILITY
+}
+
+enum Affinity {
+  REFLEX
+  DISCIPLINE
+  BRAWN
+  FORTUNE
 }
