@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
         <title>B4B Deck Builder</title>
       </Head>
       <div
-        className="fixed w-screen h-screen overflow-hidden bg-black"
+        className="fixed w-screen h-screen overflow-hidden bg-black pointer-events-none"
         style={{ zIndex: -1 }}
       >
         <Image

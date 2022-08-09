@@ -5,6 +5,7 @@ const CardWrapper = createContext();
 const CardContext = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
+  const [filteredCards, setFilteredCards] = useState([]);
 
   const loadCards = (data) => {
     setLoading(true);
@@ -12,8 +13,22 @@ const CardContext = ({ children }) => {
     return setLoading(false);
   };
 
+  const filterCardsHandler = (newCard) =>
+    setFilteredCards((prevState) => [...prevState, newCard]);
+
+  const resetFilteredCards = () => setFilteredCards([]);
+
   return (
-    <CardWrapper.Provider value={{ setCards, loading, cards }}>
+    <CardWrapper.Provider
+      value={{
+        setCards,
+        loading,
+        cards,
+        filteredCards,
+        filterCardsHandler,
+        resetFilteredCards,
+      }}
+    >
       {children}
     </CardWrapper.Provider>
   );
