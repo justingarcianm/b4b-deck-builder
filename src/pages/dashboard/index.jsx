@@ -1,48 +1,31 @@
-import { useEffect, useState } from "react";
+import { CardContext } from "../../context/card.context";
 import apiHandler from "../../utils/apiHandler";
-
-import Card from "../../../components/card";
-
-import { FaSlidersH, FaSearch } from "react-icons/fa";
+import FilterDisplay from "../../../components/UI/dashboard/filter-display";
+import DeckBuilder from "../../../components/UI/dashboard/deck-builder";
+import DashNav from "../../../components/UI/dashboard/dash-nav";
+import CardDisplay from "../../../components/UI/dashboard/card-display";
 
 const Dashboard = ({ data }) => {
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    setCards(data);
-  }, [data]);
-
   return (
-    <div className="flex">
-      <aside className="w-1/4">DECK</aside>
-      <div className="w-3/4">
-        <div className="flex justify-end align-middle">
-          <div className="flex align-middle">
-            <FaSlidersH /> FILTER
+    <CardContext>
+      <div className="flex">
+        <aside className="w-1/4">
+          <DeckBuilder />
+          <FilterDisplay />
+        </aside>
+        <div className="w-3/4">
+          <DashNav />
+          <div className="w-full">
+            <CardDisplay data={data} />
           </div>
-          <div>
-            <form className="flex align-middle justify-start">
-              <button type="submit">
-                <FaSearch />
-              </button>
-              <input type="text" placeholder="SEARCH" />
-            </form>
-          </div>
-        </div>
-        <div className="flex w-full">
-          {cards.length > 0 &&
-            cards.map((card) => {
-              return <Card key={card.id} card={card} />;
-            })}
         </div>
       </div>
-    </div>
+    </CardContext>
   );
 };
 
 export async function getServerSideProps() {
   const data = await apiHandler("cards");
-
   return { props: { data } };
 }
 
