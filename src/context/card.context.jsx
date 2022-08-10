@@ -6,6 +6,7 @@ const CardContext = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);
+  const [displayFilter, setDisplayFilter] = useState(false);
 
   const loadCards = (data) => {
     setLoading(true);
@@ -27,6 +28,8 @@ const CardContext = ({ children }) => {
         filteredCards,
         filterCardsHandler,
         resetFilteredCards,
+        displayFilter,
+        setDisplayFilter,
       }}
     >
       {children}

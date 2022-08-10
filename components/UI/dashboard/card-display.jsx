@@ -8,7 +8,7 @@ import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 const CardDisplay = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  let { cards, setCards, loading } = CardState();
+  let { cards, setCards } = CardState();
 
   useEffect(() => {
     setCards(data);

@@ -8,8 +8,8 @@ import CardDisplay from "../../../components/UI/dashboard/card-display";
 const Dashboard = ({ data }) => {
   return (
     <CardContext>
-      <div className="flex">
-        <aside className="w-1/4">
+      <div className="flex gap-8">
+        <aside className="w-1/4 bg-transparent border p-2 rounded-md border-gray-500 shadow-sm">
           <DeckBuilder />
           <FilterDisplay />
         </aside>

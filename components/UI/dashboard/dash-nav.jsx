@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { FaSlidersH, FaSearch } from "react-icons/fa";
+import { CardState } from "../../../src/context/card.context";
 
 const DashNav = () => {
   const [activeFilter, setActiveFilter] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
+  const { setDisplayFilter } = CardState();
+
   const openFilters = () => {
     if (activeFilter) {
-      // TODO open Filter display
       // TODO filter cards based on params
+      setDisplayFilter(false);
       setActiveFilter(false);
     } else {
+      setDisplayFilter(true);
       setActiveFilter(true);
     }
   };
