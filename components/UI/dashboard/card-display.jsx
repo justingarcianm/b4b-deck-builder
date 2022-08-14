@@ -7,12 +7,14 @@ import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 
 const CardDisplay = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   let { cards, setCards } = CardState();
 
   useEffect(() => {
-    setCards(data);
-  }, [data, setCards]);
+    setCards(data.cards);
+    setTotalPages(Math.round(data.totalCards / 8));
+  }, [data, setCards, setTotalPages]);
 
   const updatePage = async (direction) => {
     if (direction === "forward") {
@@ -37,10 +39,12 @@ const CardDisplay = ({ data }) => {
       <div className="w-full">
         <div className="grid xl:grid-cols-4 gap-3 xl:grid-rows-2">
           {cards.length > 0 &&
-            cards.map((card) => <Card key={card.id} card={card} />)}
+            cards.map((card, idx) => (
+              <Card index={idx} key={card.id} card={card} />
+            ))}
         </div>
         <span className="mt-4 text-center w-full block">
-          PAGE {currentPage} / 0
+          {/* PAGE {currentPage} / {totalPages} */}
         </span>
       </div>
 

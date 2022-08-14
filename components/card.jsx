@@ -4,7 +4,7 @@ import { FiTarget } from "react-icons/fi";
 import { FaWeightHanging, FaDice } from "react-icons/fa";
 import { IoSpeedometerOutline } from "react-icons/io5";
 
-const Card = ({ card }) => {
+const Card = ({ card, index }) => {
   const [active, setActive] = useState(false);
 
   const displayAffinity = (affinity) => {
@@ -25,6 +25,7 @@ const Card = ({ card }) => {
         active ? "border-red-500" : "border-gray-900"
       } p-4 bg-gray-900 cursor-pointer shadow-sm`}
       onClick={() => setActive(!active)}
+      data-card={index}
     >
       <div className="flex flex-col justify-between">
         <div className="flex justify-between items-center gap-4">
@@ -35,7 +36,7 @@ const Card = ({ card }) => {
           <span>{displayAffinity(card.cardAffinity)}</span>
         </div>
         <div className="mt-2">
-          <p className="pointer-events-none tracking-wide	leading-loose">
+          <p className="pointer-events-none tracking-wide	leading-loose text-sm">
             {card.desc}
           </p>
         </div>

@@ -3,7 +3,7 @@ import { FaGithub } from "react-icons/fa";
 const Footer = () => {
   return (
     <footer className="p-4 mt-4 text-white bg-gray-900">
-      <div className="flex justify-between container mx-auto">
+      <div className="flex justify-between container mx-auto p-4">
         <p>
           Created by{" "}
           <a

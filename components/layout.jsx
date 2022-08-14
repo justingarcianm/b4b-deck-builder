@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
       </div>
       <Nav />
       <main>
-        <div className="z-1 text-white">{children}</div>
+        <div className="z-1 text-white py-4 px-8">{children}</div>
       </main>
       <Footer />
     </>

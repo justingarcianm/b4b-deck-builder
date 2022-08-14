@@ -8,17 +8,6 @@ const CardContext = ({ children }) => {
   const [filteredCards, setFilteredCards] = useState([]);
   const [displayFilter, setDisplayFilter] = useState(false);
 
-  const loadCards = (data) => {
-    setLoading(true);
-    setCards(data);
-    return setLoading(false);
-  };
-
-  const filterCardsHandler = (newCard) =>
-    setFilteredCards((prevState) => [...prevState, newCard]);
-
-  const resetFilteredCards = () => setFilteredCards([]);
-
   return (
     <CardWrapper.Provider
       value={{
@@ -26,8 +15,6 @@ const CardContext = ({ children }) => {
         loading,
         cards,
         filteredCards,
-        filterCardsHandler,
-        resetFilteredCards,
         displayFilter,
         setDisplayFilter,
       }}

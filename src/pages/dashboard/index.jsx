@@ -25,7 +25,7 @@ const Dashboard = ({ data }) => {
 };
 
 export async function getServerSideProps() {
-  const data = await apiHandler("cards");
+  const data = await apiHandler("cards?page=1");
   return { props: { data } };
 }
 
